@@ -52,7 +52,7 @@ The next time your keyboard or mouse drops below the threshold you set, you shou
 <<image>>
   
  
-## Feedback
+## Support
 
 This script is provided as-is, and without support. 
 
@@ -62,7 +62,6 @@ If you run into difficulties check that the paths are correct:
 * `MouseAndKeyboardBatteryChecks.scpt` should point to wherever you have installed the `btstat` script
 * `net.martinsoft.batterychecker.plist` should point to whenever you installed `MouseAndKeyboardBatteryChecks.scpt`
 * Also check that `btstat` returns the correct battery levels for your devices (see below) and that the device names match those in `MouseAndKeyboardBatteryChecks.scpt`
-
 
 
 ## Further info: btstat
@@ -81,3 +80,10 @@ If run with a device name, it will return a single integer indicating the batter
 $ btstat MagicMouse2
 97
 ```
+
+
+## Feedback
+
+If you're using this and finding it useful, I would love to know! 
+
+Tag me in a picture on [Instagram]: https://instagram.com/martinsoft ! 😃
