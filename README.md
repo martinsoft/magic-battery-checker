@@ -6,7 +6,7 @@ Check your Magic Keyboard / Mouse battery levels from macOS command line, and tr
 ## Background 
 Ever notice that macOS seems to warn you that your Magic Mouse or Magic Keyboard battery is low, about 2 minutes before it runs out?
 
-This can be really inconvenient! Especially if you're on an iMac you don't have a separate keyboard or mouse to fall back on.
+This can be really inconvenient! Especially if you're on an iMac you don't have an alternative to a mouse to fall back on, or if you don't have the lightning cable to hand.
 
 So, `magic-battery-checker` aims to help avoid unplanned situations like this: 
 ![Magic Mouse turned upside down to recharge](resources/magicmousefail.jpg)
