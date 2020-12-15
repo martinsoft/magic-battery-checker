@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+DEVICES_STATUS=`ioreg -r -l -n AppleHSBluetoothDevice | \
+    egrep '"BatteryPercent" = |^  \|   "Bluetooth Product Name" = ' | \
+    tr -d '| ' | tr -s " " | \
+    awk 'NR % 2 == 1 { o=$0 ; next } { print o","$0 } ' | \
+    sed -e "s/\"BluetoothProductName\"=//g" | \
+    sed -e "s/\"BatteryPercent\"=//g"`
+
+if [ -z "$1" ]; then 
+    echo $DEVICES_STATUS
+else 
+    # Filter by the given device name
+    echo $DEVICES_STATUS | grep $1 | sed -e "s/\"$1\",//g"
+fi
