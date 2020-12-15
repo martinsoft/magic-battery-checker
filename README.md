@@ -23,8 +23,8 @@ I have mine set up to check the battery level at the end of the day. If the batt
 ## Notes
 This repo includes two utilities:
 
-1. A command line tool `btstat` which reports the battery level of a Magic Mouse and/or Magic Keyboard currently connected to your Mac.
-2. A LaunchAgent service which can periodically check the battery level and trigger a notifictaion if the battery is low.
+1. A command line tool `btstat` that reports the battery level of a Magic Mouse and/or Magic Keyboard currently connected to your Mac.
+2. A LaunchAgent service that can periodically check the battery level and trigger a notification if the battery is low.
 
 Using these tools, it's possible to trigger a battery check and a battery warning if necessary, at a time that we choose.
 
