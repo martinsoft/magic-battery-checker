@@ -102,7 +102,7 @@ If you run into difficulties check that the paths are correct:
 
 ## Further info: btstat
 
-`btstat` is a script which uses ioreg to return the current battery percentages for Apple bluetooth devices connected to your Mac.
+`btstat` is a shell script that uses `ioreg` to return the current battery percentages for Apple bluetooth devices connected to your Mac.
 
 When run with no arguments, it will list device names and battery percentages: e.g. 
 ```
