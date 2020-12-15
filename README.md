@@ -8,7 +8,8 @@ Ever notice that macOS seems to warn you that your Magic Mouse or Magic Keyboard
 
 This can be really inconvenient! Especially if you're on an iMac you don't have an alternative to a mouse to fall back on, or if you don't have the lightning cable to hand.
 
-So, `magic-battery-checker` aims to help avoid unplanned situations like this: 
+Enter `magic-battery-checker`, which aims to help avoid unplanned situations like this: 
+
 ![Magic Mouse turned upside down to recharge](resources/magicmousefail.jpg)
 
   
