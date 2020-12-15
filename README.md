@@ -61,7 +61,7 @@ This sets up a LaunchAgent service which will run the Apple Script on a schedule
 3. Update the `integer` values for `Hour` and `Minute` to set the time you would like the battery levels to be checked. (It defaults to 5:30pm).
 4. Move `net.martinsoft.batterychecker.plist` into `~/Library/LaunchAgents`
 5. To start the service for the first time either:
-    * 'launchctl load ~/Library/LaunchAgents/net.martinsoft.batterychecker.plist`
+    * `launchctl load ~/Library/LaunchAgents/net.martinsoft.batterychecker.plist`
     * OR log out and log in again. 
 
 (The service will start automatically every time you restart your machine).
