@@ -38,10 +38,12 @@ Using these tools, it's possible to trigger a battery check and a battery warnin
 2. Check that `btstat` works correctly by running it from the command line. It should output your keyboard and mouse battery levels (assuming you have both connected):
     ```
     $ btstat
-    "MagicMouse2",97
-    "MagicKeyboard",70
+    0x192817a6b7 "Magic Mouse" AB1234567AB12CDE3 97
+    0x8765432e12 "Magic Keyboard" EF1234567DC12BA82 70
     ```
 **Note: if your devices are named differently to those above, or if you only have one device, you may need to update these in MouseAndKeyboardBatteryChecks.scpt**
+
+The output format from `btstat` is <device_id> <device_type> <serial_number> <battery_percentage>.
 
 ### Set up Apple Script
 `MouseAndKeyboardBatteryChecks` is an AppleScript that uses `btstat` to fetch the battery levels and triggers macOS push notifications if either of them fall beneath a specified threshold.
@@ -49,7 +51,7 @@ Using these tools, it's possible to trigger a battery check and a battery warnin
 1. Open `Service/MouseAndKeyboardBatteryChecks.scpt` using Script Editor, and update the following:
     * `btStatLocation` should match wherever you installed the `btstat` script
     * `warningThreshold` determines when a 'battery low' notification should be triggered. e.g. '30' means a notification will fire if the keyboard or mouse battery falls below 30%. 
-    * Edit the device checks as necessary - the default assumes you have a Magic Mouse reported in `btstat` as `MagicMouse2` and a Magic Keyboard reported in `btstat` as `MagicKeyboard`. If you don't need both checks you can remove as necessary. Similarly, if the device names are different, you should update them to match your devices.
+    * Edit the device checks as necessary - the default assumes you have a Magic Mouse reported in `btstat`. Simply update to match the device id or serial number of your device. If you also have a magic keyboard, uncomment and update the keyboard portion of the script.
 2. Move `Service/MouseAndKeyboardBatteryChecks.scpt` to a suitable location on your Mac. 
     * Again I have mine in `~/Library/Scripts` but you can put it wherever you like.
 

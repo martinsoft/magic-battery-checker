@@ -1,15 +1,52 @@
-#!/bin/zsh
+#!/bin/bash
 
-DEVICES_STATUS=`ioreg -r -l -n AppleHSBluetoothDevice | \
-    egrep '"BatteryPercent" = |^  \|   "Bluetooth Product Name" = ' | \
-    tr -d '| ' | tr -s " " | \
-    awk 'NR % 2 == 1 { o=$0 ; next } { print o","$0 } ' | \
-    sed -e "s/\"BluetoothProductName\"=//g" | \
-    sed -e "s/\"BatteryPercent\"=//g"`
+# Extract the relevant lines from ioreg command output
+ioreg_output=$(ioreg -c AppleDeviceManagementHIDEventService -r -l)
+
+# Initialize variables
+device_id=""
+product_name=""
+serial_number=""
+battery_percentage=""
+DEVICES_STATUS=""
+
+# Process each line of the output
+while IFS= read -r line; do
+    # Extract the device id (lines containing 'id 0x')
+    if [[ "$line" =~ id\ (0x[0-9a-fA-F]+) ]]; then
+        device_id="${BASH_REMATCH[1]}"
+    fi
+
+    # Extract the product name (lines containing 'Product' = "")
+    if [[ "$line" =~ \"Product\"[[:space:]]*=[[:space:]]*\"([^\"]+)\" ]]; then
+        product_name="${BASH_REMATCH[1]}"
+    fi
+
+    # Extract the serial number (lines containing 'SerialNumber' = "")
+    if [[ "$line" =~ \"SerialNumber\"[[:space:]]*=[[:space:]]*\"([^\"]+)\" ]]; then
+        serial_number="${BASH_REMATCH[1]}"
+    fi
+
+    # Extract the battery percentage (lines containing 'BatteryPercent' = "")
+    if [[ "$line" =~ \"BatteryPercent\"[[:space:]]*=[[:space:]]*([0-9]+) ]]; then
+        battery_percentage="${BASH_REMATCH[1]}"
+    fi
+
+    # Print the collected data once all fields are found
+    if [[ -n "$device_id" && -n "$product_name" && -n "$serial_number" && -n "$battery_percentage" ]]; then
+        DEVICES_STATUS="$DEVICES_STATUS$device_id \"$product_name\" $serial_number $battery_percentage"$'\n'
+        # echo "$device_id \"$product_name\" $serial_number $battery_percentage"
+        # Reset variables for the next device
+        device_id=""
+        product_name=""
+        serial_number=""
+        battery_percentage=""
+    fi
+done <<< "$ioreg_output"
 
 if [ -z "$1" ]; then 
     echo $DEVICES_STATUS
 else 
-    # Filter by the given device name
-    echo $DEVICES_STATUS | grep $1 | sed -e "s/\"$1\",//g"
+    # Filter by the given device id
+    echo $DEVICES_STATUS | grep $1 | awk '{print $NF}'
 fi
